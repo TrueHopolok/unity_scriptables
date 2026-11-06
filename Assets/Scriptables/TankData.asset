@@ -9,6 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82a8d20c41f345e382312ee1050e7ce2, type: 3}
-  m_Name: Welcome2DScript
-  m_EditorClassIdentifier: Assembly-CSharp::DefaultNamespace.Welcome2DScript
+  m_Script: {fileID: 11500000, guid: a88902005284eb34dbb770917ee14bd6, type: 3}
+  m_Name: TankData
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyData
+  maxHealth: 4
+  speed: 1
+  size: 1.5
+  scoreValue: 5
+  color: {r: 0, g: 1, b: 0, a: 1}
