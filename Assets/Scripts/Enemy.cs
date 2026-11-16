@@ -1,14 +1,21 @@
+using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    [SerializeField] AudioSource enemyDeathSFX;
     EnemyData data;
     int health;
     Rigidbody2D body;
+    Collider2D collider;
+    Renderer renderer;
 
     void Awake()
     {
         body = GetComponent<Rigidbody2D>();
+        collider = GetComponent<BoxCollider2D>();
+        renderer = GetComponent<SpriteRenderer>();
     }
 
     // Called by the spawner right after Instantiate
@@ -34,7 +41,26 @@ public class Enemy : MonoBehaviour
         health -= dmg;
         if (health > 0) return;
 
+        collider.enabled = false;
+        renderer.enabled = false;
+
         Debug.Log("Score +" + data.scoreValue);
+        if (enemyDeathSFX)
+        {
+            enemyDeathSFX.Play();
+            // StartCoroutine(WaitUntilFinishes()); // alternative
+            Destroy(gameObject, enemyDeathSFX.clip.length);
+        }
+        else // audio clip wasnt set
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    IEnumerator WaitUntilFinishes()
+    {
+        WaitUntil.Equals(enemyDeathSFX.isPlaying, true);
         Destroy(gameObject);
+        yield return null;
     }
 }
