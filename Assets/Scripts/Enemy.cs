@@ -7,14 +7,12 @@ public class Enemy : MonoBehaviour
     EnemyData data;
     int health;
     Rigidbody2D body;
-    Collider2D collider;
-    Renderer renderer;
+    Renderer sprite;
 
     void Awake()
     {
         body = GetComponent<Rigidbody2D>();
-        collider = GetComponent<BoxCollider2D>();
-        renderer = GetComponent<SpriteRenderer>();
+        sprite = GetComponent<SpriteRenderer>();
     }
 
     // Called by the spawner right after Instantiate
@@ -40,8 +38,8 @@ public class Enemy : MonoBehaviour
         health -= dmg;
         if (health > 0) return;
 
-        collider.enabled = false;
-        renderer.enabled = false;
+        body.simulated = false;
+        sprite.enabled = false;
 
         Debug.Log("Score +" + data.scoreValue);
         if (enemyDeathSFX)
