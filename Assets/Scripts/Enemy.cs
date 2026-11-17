@@ -1,5 +1,4 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -59,7 +58,7 @@ public class Enemy : MonoBehaviour
 
     IEnumerator WaitUntilFinishes()
     {
-        WaitUntil.Equals(enemyDeathSFX.isPlaying, true);
+        yield return new WaitUntil(() => enemyDeathSFX.isPlaying == false);
         Destroy(gameObject);
         yield return null;
     }
